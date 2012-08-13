@@ -23,17 +23,6 @@ logconf = "conf/logging.cfg"
 logging.config.fileConfig(logconf)
 
 
-HEADERS = ("host",
-           "timestamp",
-           "method",
-           "uri",
-           "protocol",
-           "status",
-           "bytes",
-           "referer",
-           "user_agent")
-
-
 # 66.249.73.69 - - [08/Aug/2012:12:10:10 +0400] "GET / HTTP/1.1" 200 23920 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 access_log_pattern = re.compile(
     r"(?P<host>[\d\.]+)\s"
@@ -73,7 +62,7 @@ class HTTPDateTime(object):
 
 def log_entry_getter():
     for line in sys.stdin:
-        match= access_log_pattern.match(line)
+        match = access_log_pattern.match(line)
         if match:
             yield match.groupdict()
 
@@ -108,6 +97,7 @@ def log_doc_getter():
                    user_agent=fields.get("user_agent", "-"))
         yield doc
 
+
 def get_index_name():
     return datetime.datetime.now().strftime("access-%Y%m")
 
@@ -130,7 +120,6 @@ def put_index(conn, doc_type, mapping, index_name):
     conn.put_mapping(doc_type=doc_type,
                      mapping=mapping,
                      indices=[index_name])
-
 
 
 def index_log(conn, index_name, doc_type):
