@@ -1,0 +1,64 @@
+{
+    "template": "access-*",
+    "settings": {
+        "number_of_replicas": 1,
+        "number_of_shards": 5
+    },
+    "mappings": {
+        "access": {
+            "_all": {
+                "enabled": false
+            },
+            "_source": {
+                "compress": true
+            },
+            "properties": {
+                "bytes": {
+                    "index": "not_analyzed",
+                    "store": "yes",
+                    "type": "integer"
+                },
+                "host": {
+                    "index": "analyzed",
+                    "store": "yes",
+                    "type": "ip"
+                },
+                "method": {
+                    "index": "not_analyzed",
+                    "store": "yes",
+                    "type": "string"
+                },
+                "protocol": {
+                    "index": "not_analyzed",
+                    "store": "yes",
+                    "type": "string"
+                },
+                "referrer": {
+                    "index": "not_analyzed",
+                    "store": "yes",
+                    "type": "string"
+                },
+                "status": {
+                    "index": "analyzed",
+                    "store": "yes",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "index": "analyzed",
+                    "store": "yes",
+                    "type": "date"
+                },
+                "uri": {
+                    "index": "not_analyzed",
+                    "store": "yes",
+                    "type": "string"
+                },
+                "user-agent": {
+                    "index": "not_analyzed",
+                    "store": "yes",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
