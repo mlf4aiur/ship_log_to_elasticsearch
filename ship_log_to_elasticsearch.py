@@ -85,6 +85,7 @@ def log_doc_getter():
             exstr = traceback.format_exc()
             logger.debug(request)
             logger.debug(exstr)
+            continue
 
         doc = dict(host=fields.get("host", "1.1.1.1"),
                    timestamp=timestamp,
